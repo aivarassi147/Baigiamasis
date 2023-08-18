@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from bs4 import BeautifulSoup
 import requests
-import time
 from . import models
 import urllib.parse
 
@@ -29,40 +28,19 @@ def scrape_products(request):
 def scrape_recipes(request, product_name):
     url = 'https://www.receptai.lt/paieska?'
     params = {'q': 'product_name'}
-    print(product_name)
 
 
     response = requests.get(url + urllib.parse.urlencode(params))
     soup = BeautifulSoup(response.content, 'html.parser')
 
+    product_elements = soup.find_all('div', class_='list')
 
-    initial_content = soup.find_all('div', class_='item')
+    recipes = []
 
-
-    scroll_endpoint = 'https://www.receptai.lt/ingredientas/vistiena-995/37'
-    scroll_params = {'page': 2}
-
-
-    max_scrolls = 10
-
-    scroll_count = 0
-    while scroll_count < max_scrolls:
-
-        scroll_response = requests.get(scroll_endpoint, params=scroll_params)
-        scroll_soup = BeautifulSoup(scroll_response.content, 'html.parser')
+    for product_element in product_elements:
+        product_title = product_element.find('img')['alt']
 
 
-        new_content = scroll_soup.find_all('div', class_='item')
-        initial_content.extend(new_content)
+        recipes.append(models.ScrapedRecipes(product_title))
 
-
-        scroll_params['page'] += 1
-
-        scroll_count += 1
-
-
-        time.sleep(0)
-
-
-    for title in initial_content:
-        print(title.text)
+    return render(request, 'recipes/scraper.html', {'recipes': recipes})

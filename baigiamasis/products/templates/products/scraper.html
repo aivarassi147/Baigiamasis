@@ -34,6 +34,16 @@
             height: auto;
         }
 
+        .recipes-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-gap: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
         .recipes-box:hover {
             background-color: grey;
         }
@@ -45,27 +55,6 @@
             height: auto;
         }
 
-
-                #options {
-          display: flex;
-        }
-
-        #options ul {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-        }
-
-        #options li {
-          margin-right: 10px;
-        }
-
-        #content {
-          width: 300px;
-          height: 300px;
-          overflow: auto;
-          border: 1px solid #ccc;
-        }
     </style>
 </head>
 <body>
@@ -87,39 +76,13 @@
     <div class="recipes-container">
         {% for product in products %}
             <div class="recipes-box">
-                <h2>{{ product.name }}</h2>
-                <p>Price: {{ product.price }}</p>
-                <img src="{{ product.image }}" alt="{{ product.name }}">
-                <a href = '{{ product.link }}'> nuoroda</a>
+                <h2>{{ product.title }}</h2>
+
             </div>
         {% endfor %}
     </div>
-</div>
 
-  <script>
-    const contentDiv = document.getElementById('content');
-    const optionLinks = document.querySelectorAll('.option-link');
 
-    optionLinks.forEach(link => {
-      link.addEventListener('click', (event) => {
-        event.preventDefault();
-        const selectedPage = link.getAttribute('data-page');
-        loadContent(selectedPage);
-      });
-    });
 
-    function loadContent(page) {
-      // Simulate fetching data from a scraped source or API
-      const scrape_recipes = {
-        page1: "Content for page 1",
-        page2: "Content for page 2",
-        page3: "Content for page 3",
-        // Add more data as needed
-      };
-
-      const content = fakeData[page] || "No content available";
-      contentDiv.innerHTML = `<p>${content}</p>`;
-    }
-  </script>
 </body>
 </html>

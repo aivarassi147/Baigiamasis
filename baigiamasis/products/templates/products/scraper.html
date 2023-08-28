@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Scraped Products</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="templates/css/design.css">
+    <title>Visi Produktai</title>
     <style>
         .product-container {
             display: grid;
@@ -55,13 +58,75 @@
             height: auto;
         }
 
+
+* {
+  box-sizing: border-box;
+}
+
+
+
+/* Style the header */
+header {
+  background-color: #C0C0C0;
+  padding: 10px;
+  font-size: 20px;
+
+}
+
+
+/* Style the footer */
+footer {
+  background-color: #aa695b;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+  nav, article {
+    width: 100%;
+    height: auto;
+  }
+}
+
+
+
+section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
     </style>
 </head>
+
+<header>
+
+    <nav>
+        <a href="main.html">Pagrindinis</a>
+        <a href="{% url 'contact' %}">Kontaktai</a>
+    </nav>
+</header>
+
+
 <body>
+
+<section>
+  <nav>
+    <ul>
+      <li><a href='{{scrape_products}}?product_type=mesa'>mamos</a></li>
+      <li><a href="https://www.eurohorecana.lt/saldyti-kotletai-astra-kogus-24-vnt-170-g-4-08-kg">Saldyti</a></li>
+      <li><a href="https://www.foodnet.lt/products/patiekalai-ir-uzkandziai/kotletai">Uzsisakyti</a></li>
+    </ul>
+  </nav>
+
+</section>
+
     <h1>Scraped Products</h1>
     <div class="product-container">
         {% for product in products %}
-            <div class="product-box" onclick="{{scrape_recipes}}">
+            <div class="product-box" onclick="location.href='{{request.get_full_path}}&product_name={{product.name}}'">
                 <h2>{{ product.name }}</h2>
                 <p>Price: {{ product.price }}</p>
                 <img src="{{ product.image }}" alt="{{ product.name }}">
@@ -70,19 +135,23 @@
         {% endfor %}
     </div>
 
-
-
+<div>
+{% if recipes %}
  <h1>Scraped Recipes</h1>
     <div class="recipes-container">
-        {% for product in products %}
+        {% for recipe in recipes %}
             <div class="recipes-box">
-                <h2>{{ product.title }}</h2>
-
+                <h2>{{ recipe.title }}</h2>
             </div>
         {% endfor %}
     </div>
+{% endif %}
 
+</div>
 
+<footer>
+  <span>&copy Visos teisės saugomos</span>
+</footer>
 
 </body>
 </html>

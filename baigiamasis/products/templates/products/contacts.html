@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset=utf-8>
+
+
+<head>
+    <title>Kontaktai</title>
+    <meta charset=utf-8>
+    <link rel="stylesheet" href="css/css_dizainas.css">
+
+</head>
+
+<header>
+
+    <nav>
+        <a href="index.html">Pagrindinis</a>
+        <a href="profilis.html">Kontaktai</a>
+
+    </nav>
+</header>
+
+
+<main>
+<h1> Čia galite užduoti klausimą</h1>
+<form action="http://localhost" method="post">
+    <label for="vardas">Jūsų vardas: </label>
+    <input name="firstname" type="text" id="vardas" placeholder="Vardenis" autofocus>
+    <br><br>
+    <label for="pavarde">Jūsų pavardė: </label>
+    <input name="lastname" type="text" id="pavarde" placeholder="Pavardenis">
+    <br><br>
+    <label for="pastas">El. paštas: </label>
+    <input name="email" type="text" id="pastas" placeholder="vardas@paštas.lt">
+    <br><br>
+    <label for="lytis">Lytis</label>
+    <select name="gender" id="lytis">
+        <option value="female">Moteris</option>
+        <option value="male">Vyras</option>
+    </select>
+    <br><br>
+    <label for="žinutė">Klausimas: </label>
+    <br>
+    <textarea name="message" rows="10" cols="30" id="žinutė"></textarea>
+    <br>
+    <button type="submit" formaction="https://thxdreams.com/img/thx_negro.png">&#128077</button>
+
+</main>
+
+<footer>
+    <span>&copy Visos teisės saugomos</span>
+</footer>
+</html>

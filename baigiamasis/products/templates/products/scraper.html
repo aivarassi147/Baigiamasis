@@ -6,17 +6,19 @@
 <link rel="stylesheet" href="templates/css/design.css">
     <title>Visi Produktai</title>
     <style>
+
+        body {
+        background-color: #484848; /* Replace with your desired color */
+        }
+
         .product-container {
             display: grid;
             overflow-y: scroll;
             max-height: 400px; /* Adjust the maximum height as needed */
+            border-radius: 10px;
+            border: 1px solid #ccc;
         }
 
-        .recipes-container {
-            display: grid;
-            overflow-y: scroll;
-            max-height: 400px; /* Adjust the maximum height as needed */
-        }
         .product-box {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -25,6 +27,8 @@
             padding: 10px;
             margin: 10px;
             cursor: pointer;
+            border-radius: 10px;
+            border: 1px solid #ccc;
         }
         .product-box:hover {
             background-color: grey;
@@ -35,6 +39,14 @@
         .product-box img {
             max-width: 100%;
             height: auto;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .recipes-container {
+        display: grid;
+        overflow-y: scroll;
+        max-height: 400px; /* Adjust the maximum height as needed */
         }
 
         .recipes-box {
@@ -59,43 +71,73 @@
         }
 
 
-* {
-  box-sizing: border-box;
+        * {
+        box-sizing: border-box;
+        }
+
+
+
+        /* Style the header */
+        header {
+        background-color: #C0C0C0;
+        padding: 10px;
+        font-size: 20px;
+
+        }
+
+
+        /* Style the footer */
+        footer {
+        background-color: #aa695b;
+        padding: 10px;
+        text-align: center;
+        color: white;
+        }
+
+        /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+        @media (max-width: 600px) {
+        nav, article {
+        width: 100%;
+        height: auto;
+        }
+        }
+
+
+
+
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 5px;
+  justify-content: center;
+  text-decoration: none;
 }
 
 
-
-/* Style the header */
-header {
-  background-color: #C0C0C0;
-  padding: 10px;
-  font-size: 20px;
+.product-image {
+  width: 210px;
+  height: 150px;
+  margin-right: 10px;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 10px;
+  border: 1px solid #ccc;
 
 }
 
-
-/* Style the footer */
-footer {
-  background-color: #aa695b;
-  padding: 10px;
+.product-image + p {
+  margin-top: 5px; /* Add space between the image and the text */
   text-align: center;
-  color: white;
-}
-
-/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
-@media (max-width: 600px) {
-  nav, article {
-    width: 100%;
-    height: auto;
-  }
-}
+  color: #C8C8C8;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid #ccc;
 
 
-
-section::after {
-  content: "";
-  display: table;
-  clear: both;
 }
 
     </style>
@@ -113,11 +155,29 @@ section::after {
 <body>
 
 <section>
+<h2>Mėsos produktai</h2>
   <nav>
-    <ul>
-      <li><a href='{{scrape_products}}?product_type=mesa'>mamos</a></li>
-      <li><a href="https://www.eurohorecana.lt/saldyti-kotletai-astra-kogus-24-vnt-170-g-4-08-kg">Saldyti</a></li>
-      <li><a href="https://www.foodnet.lt/products/patiekalai-ir-uzkandziai/kotletai">Uzsisakyti</a></li>
+    <ul class="product-list">
+         <a href='{{scrape_products}}?product_type=chicken'>
+            <img src="https://poultry.mystagingwebsite.com/wp-content/uploads/2019/02/shutterstock_531404539-1024x684.jpg" class ='product-image'>
+            <p>Vištiena</p>
+         </a>
+         <a href='{{scrape_products}}?product_type=pork_and_beef'>
+            <img src="https://www.eatthis.com/wp-content/uploads/sites/4/2022/08/Red-meat-heart.jpg?quality=82&strip=all&w=1200" class ='product-image'>
+            <p>Jautiena/Kiauliena</p>
+         </a>
+        <a href='{{scrape_products}}?product_type=processed_meat'>
+            <img src="https://hips.hearstapps.com/hmg-prod/images/spanish-meat-tapas-royalty-free-image-507107218-1564690587.jpg" class ='product-image'>
+            <p>Apdorotos mėsos produktai</p>
+        </a>
+        <a href='{{scrape_products}}?product_type=fish'>
+            <img src="https://kj1bcdn.b-cdn.net/media/62063/fish-meat-1.jpeg" class ='product-image'>
+            <p>Žuvis</p>
+        </a>
+        <a href='{{scrape_products}}?product_type=processed_fish'>
+            <img src="https://cdn.squaremeal.co.uk/article/9897/images/best-fresh-fish-deliverys-and-online-fishmongers-uk---the-wright-brothers-cover-image_15032021050439.jpeg?w=913&auto=format%2Ccompress" class ='product-image'>
+            <p>Apdorotos žuvies produktai</p>
+        </a>
     </ul>
   </nav>
 

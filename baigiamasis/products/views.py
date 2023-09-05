@@ -3,10 +3,9 @@ from bs4 import BeautifulSoup
 import requests
 from . import models
 import urllib.parse
+from django.shortcuts import render
 
 def scrape_products(url):
-    # url = 'https://www.rimi.lt/e-parduotuve/lt/akcijos?page=1&pageSize=100&query=%3Arelevance%3AassortmentStatus%3AinAssortment%3AinStockFlag%3Atrue%3AfixedPrice%3Afalse%3AfirstLevelCategory%3AM%25C4%2597sa%252C%2B%25C5%25BEuvys%2Bir%2Bkulinarija'
-
     response = requests.get(url)
 
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -38,12 +37,13 @@ def scrape_recipes(product_name):
     recipes = []
 
     for recipes_element in recipes_elements:
-        print(recipes_element.find('img'))
         recipes_title = recipes_element.find('img')['alt']
+        recipes_image = recipes_element.find('img')['src']
+        recipes_link = recipes_element.find('a')['href']
 
 
 
-        recipes.append(models.ScrapedRecipes(recipes_title))
+        recipes.append(models.ScrapedRecipes(recipes_title, recipes_image, recipes_link))
 
     return recipes
 
